@@ -26,7 +26,19 @@ header.appendChild(dateSpan);
 header.appendChild(headingOne);
 header.appendChild(tempSpan);
 
+// add classes
+header.classList.add('header');
+dateSpan.classList.add('date');
+tempSpan.classList.add('temp');
+
+// adding objects properties(content) to elements
+dateSpan.textContent = "SMARCH 28, 2019";
+headingOne.textContent = "Lambda Times";
+tempSpan.textContent = "98°";
 
 
+return header;
 
 }
+
+Header();
