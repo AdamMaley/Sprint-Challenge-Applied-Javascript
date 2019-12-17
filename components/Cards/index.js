@@ -21,45 +21,54 @@
 
 
 
-dataTopicsObj.forEach((item) => {
-    axios.get(`https://lambda-times-backend.herokuapp.com/articles`)
-      .then((res) => {
-          console.log(res);
+
+axios.get(`https://lambda-times-backend.herokuapp.com/articles`)
+    .then(res => {
+        console.log(res);
+
+        res.data.articles.forEach(article => {
+            let card = articleCardCreator(article);
+            articles.appendChild(card);
+
         });
-  })
+
+    })
     .catch((err) => console.log(err));
 
-    function articleCardCreator() {
-
-        // create elements
-        const card = document.createElement('div');
-        const headline = document.createElement('div');
-        const authorDiv = document.createElement('div');
-        const imageContainer = document.createElement('div');
-        const image = document.createElement('img');
-        const name = document.createElement('span');
-
-        // append
-        card.appendChild(headline);
-        card.appendChild(authorDiv);
-        authorDiv.appendChild(imageContainer);
-        imageContainer.appendChild(image);
-        author.appendChild(name);
 
 
-        // add class
-        card.classList.add('card');
-        headline.classList.add('headline');
-        author.classList.add('author');
-        imageContainer.classList.add('img-container');
 
-        // add object properties to elements
-        headline.textContent = item.headline;
-        image.src = item. //insert URL
-        name.textContent = `By ${item.name}`
+function articleCardCreator(res) {
 
-    }
+    // create elements
+    const card = document.createElement('div');
+    const headline = document.createElement('div');
+    const authorDiv = document.createElement('div');
+    const imageContainer = document.createElement('div');
+    const image = document.createElement('img');
+    const name = document.createElement('span');
 
-    articleCardCreator();
+    // append
+    card.appendChild(headline);
+    card.appendChild(authorDiv);
+    authorDiv.appendChild(imageContainer);
+    imageContainer.appendChild(image);
+    authorDiv.appendChild(name);
+
+
+    // add class
+    card.classList.add('card');
+    headline.classList.add('headline');
+    author.classList.add('author');
+    imageContainer.classList.add('img-container');
+
+    // add object properties to elements
+    headline.textContent = res.data.articles.headline;
+    image.src = res.authorPhoto;
+    name.textContent = "TEST";
+
+    return card;
+}
+
 
 

@@ -12,7 +12,7 @@
 const headerContainer = document.querySelector('.header-container');
 console.log(headerContainer);
 
-function Header(obj) {
+function Header() {
 
 // creating elements
 const header = document.createElement('div');
