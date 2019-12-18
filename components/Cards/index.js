@@ -26,19 +26,34 @@ axios.get(`https://lambda-times-backend.herokuapp.com/articles`)
     .then(res => {
         console.log(res);
 
-        res.data.articles.forEach(article => {
+
+        const articlesObj = res.data.articles;
+            const bootstrap = res.bootstrap;
+            const javascript = res.javascript;
+            const jquery = res.jquery;
+            const node = res.node;
+            const technology = res.technology;
+
+            const allArticles = [].concat(bootstrap, javascript, jquery, node, technology);
+
+
+        allArticles.forEach(article => {
             let card = articleCardCreator(article);
-            articles.appendChild(card);
+            cardContainer.appendChild(card);
+
+
+            console.log('allArticles');
+
 
         });
 
     })
     .catch((err) => console.log(err));
 
+    const cardsContainer = document.querySelector('.cards-container');
 
 
-
-function articleCardCreator(res) {
+function articleCardCreator(obj) {
 
     // create elements
     const card = document.createElement('div');
@@ -63,9 +78,9 @@ function articleCardCreator(res) {
     imageContainer.classList.add('img-container');
 
     // add object properties to elements
-    headline.textContent = res.data.articles.headline;
-    image.src = res.authorPhoto;
-    name.textContent = "TEST";
+    headline.textContent = obj.headline;
+    image.src = obj.authorPhoto;
+    name.textContent = obj.authorName;
 
     return card;
 }
